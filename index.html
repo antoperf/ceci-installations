@@ -143,6 +143,7 @@
     .navbar .container { display: flex; align-items: center; justify-content: space-between; height: 100%; }
     .nav-logo { height: 44px; width: auto; transition: opacity 0.3s; }
     .nav-logo:hover { opacity: 0.8; }
+    .nav-menu { display: flex; align-items: center; gap: 32px; }
     .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
     .nav-links a {
       font-family: var(--font-display); font-size: 0.82rem; font-weight: 600;
@@ -708,6 +709,99 @@
     }
 
     /* ============================
+       WHATSAPP MODAL
+    ============================ */
+    .wa-modal-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.7); backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+      padding: 16px;
+    }
+    .wa-modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .wa-modal {
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: 20px; padding: 36px 32px 28px; max-width: 440px; width: 100%;
+      transform: translateY(20px) scale(0.96);
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      max-height: 90vh; overflow-y: auto;
+    }
+    .wa-modal-overlay.active .wa-modal { transform: translateY(0) scale(1); }
+    .wa-modal-close {
+      position: absolute; top: 14px; right: 14px;
+      background: none; border: none; color: var(--gray-500);
+      font-size: 1.5rem; cursor: pointer; width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%; transition: background 0.2s, color 0.2s;
+    }
+    .wa-modal-close:hover { background: rgba(255,255,255,0.06); color: #fff; }
+    .wa-modal h3 {
+      font-family: var(--font-display); font-size: 1.3rem;
+      font-weight: 700; color: #fff; margin-bottom: 4px;
+    }
+    .wa-modal .wa-modal-sub {
+      font-size: 0.82rem; color: var(--gray-500); margin-bottom: 20px;
+    }
+    .wa-modal label.wa-label {
+      display: block; font-size: 0.75rem; font-weight: 600;
+      color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.06em;
+      margin-bottom: 10px;
+    }
+    .wa-services-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+      margin-bottom: 20px;
+    }
+    .wa-chip {
+      position: relative; cursor: pointer;
+    }
+    .wa-chip input { position: absolute; opacity: 0; pointer-events: none; }
+    .wa-chip span {
+      display: block; padding: 10px 12px; font-size: 0.8rem;
+      color: var(--gray-400); background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border); border-radius: 10px;
+      transition: all 0.2s; text-align: center; user-select: none;
+    }
+    .wa-chip input:checked + span {
+      background: rgba(246,137,31,0.12); border-color: var(--orange);
+      color: var(--orange); font-weight: 600;
+    }
+    .wa-chip span:hover { border-color: var(--gray-500); color: var(--gray-300); }
+    .wa-textarea {
+      width: 100%; min-height: 80px; padding: 12px 14px; font-size: 0.85rem;
+      font-family: var(--font-body); color: #fff;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 12px; resize: vertical; margin-bottom: 10px;
+      transition: border-color 0.2s;
+    }
+    .wa-textarea::placeholder { color: var(--gray-600); }
+    .wa-textarea:focus { outline: none; border-color: var(--orange); }
+    .wa-name-input {
+      width: 100%; padding: 12px 14px; font-size: 0.85rem;
+      font-family: var(--font-body); color: #fff;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 12px; margin-bottom: 20px;
+      transition: border-color 0.2s;
+    }
+    .wa-name-input::placeholder { color: var(--gray-600); }
+    .wa-name-input:focus { outline: none; border-color: var(--orange); }
+    .wa-send-btn {
+      width: 100%; padding: 14px 20px; font-size: 0.92rem; font-weight: 700;
+      font-family: var(--font-display);
+      color: #fff; background: #25D366; border: none; border-radius: 12px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .wa-send-btn:hover { background: #20bd5a; transform: translateY(-1px); }
+    .wa-send-btn svg { width: 20px; height: 20px; fill: #fff; flex-shrink: 0; }
+
+    @media (max-width: 480px) {
+      .wa-modal { padding: 28px 20px 22px; border-radius: 16px; }
+      .wa-services-grid { grid-template-columns: 1fr; }
+      .wa-modal h3 { font-size: 1.15rem; }
+    }
+
+    /* ============================
        RESPONSIVE
     ============================ */
     @media (max-width: 600px) {
@@ -779,7 +873,7 @@
       <p class="hero-sub">Malta's Trusted Installation Experts</p>
       <div class="hero-typewriter"><span id="typewriter"></span></div>
       <div class="hero-cta-group">
-        <a href="https://wa.me/35679432432" class="btn-primary" target="_blank" rel="noopener">
+        <a href="#" class="btn-primary wa-trigger">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           WhatsApp Us
         </a>
@@ -862,6 +956,24 @@
             <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div>
             <h3>Infrared Leak Detection</h3>
             <p>Advanced thermal imaging to locate hidden water leaks.</p>
+          </div>
+        </div>
+        <div class="service-card reveal reveal-delay-2">
+          <div class="service-card-bg" style="background-image:url('assets/img/solar.jpg')"></div>
+          <div class="service-card-overlay"></div>
+          <div class="service-card-content">
+            <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v2h20V7L12 2z"/><rect x="3" y="10" width="18" height="2"/><path d="M4 14v6h4v-6M10 14v6h4v-6M16 14v6h4v-6"/></svg></div>
+            <h3>Solar Panel Installation</h3>
+            <p>Harness Malta's sunshine with professionally installed solar systems.</p>
+          </div>
+        </div>
+        <div class="service-card reveal reveal-delay-3">
+          <div class="service-card-bg" style="background-image:url('assets/img/waterheater.jpg')"></div>
+          <div class="service-card-overlay"></div>
+          <div class="service-card-content">
+            <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8 2 6 5 6 8v8a4 4 0 008 0V8c0-3-2-6-6-6z"/><path d="M10 12c0-1 .5-2 2-2s2 1 2 2-1 3-2 3-2-2-2-3z"/><path d="M9 20h6"/></svg></div>
+            <h3>Water Heater Installation</h3>
+            <p>Expert fitting of water heaters and boiler systems for reliable hot water.</p>
           </div>
         </div>
       </div>
@@ -1065,7 +1177,7 @@
         </a>
       </div>
       <div class="reveal reveal-delay-2">
-        <a href="https://wa.me/35679432432" class="contact-cta" target="_blank" rel="noopener">
+        <a href="#" class="contact-cta wa-trigger">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           Message Us on WhatsApp
         </a>
@@ -1078,7 +1190,7 @@
     <div class="container">
       <div class="footer-inner">
         <img src="assets/logo-orange.png" alt="Ceci Installations" class="footer-logo">
-        <p class="footer-text">&copy; 2025 Ceci Installations. All rights reserved.</p>
+        <p class="footer-text">&copy; 2026 Ceci Installations. All rights reserved.</p>
         <ul class="footer-links">
           <li><a href="#services">Services</a></li>
           <li><a href="#process">How We Work</a></li>
@@ -1090,8 +1202,41 @@
     </div>
   </footer>
 
+  <!-- WHATSAPP MODAL -->
+  <div class="wa-modal-overlay" id="waModal">
+    <div class="wa-modal" style="position:relative;">
+      <button class="wa-modal-close" id="waClose" aria-label="Close">&times;</button>
+      <h3>👋 Tell us what you need</h3>
+      <p class="wa-modal-sub">Select the services you're interested in and we'll open WhatsApp with your message ready to send.</p>
+
+      <label class="wa-label">Your Name</label>
+      <input type="text" class="wa-name-input" id="waName" placeholder="e.g. Mark">
+
+      <label class="wa-label">What do you need?</label>
+      <div class="wa-services-grid">
+        <label class="wa-chip"><input type="checkbox" value="Electrical"><span>Electrical</span></label>
+        <label class="wa-chip"><input type="checkbox" value="Plumbing"><span>Plumbing</span></label>
+        <label class="wa-chip"><input type="checkbox" value="Underfloor Heating"><span>Underfloor Heating</span></label>
+        <label class="wa-chip"><input type="checkbox" value="Air Conditioning"><span>Air Conditioning</span></label>
+        <label class="wa-chip"><input type="checkbox" value="Core Drilling"><span>Core Drilling</span></label>
+        <label class="wa-chip"><input type="checkbox" value="Earthing"><span>Earthing</span></label>
+        <label class="wa-chip"><input type="checkbox" value="Leak Detection"><span>Leak Detection</span></label>
+        <label class="wa-chip"><input type="checkbox" value="Solar Panels"><span>Solar Panels</span></label>
+        <label class="wa-chip"><input type="checkbox" value="Water Heater"><span>Water Heater</span></label>
+      </div>
+
+      <label class="wa-label">Any extra details?</label>
+      <textarea class="wa-textarea" id="waDetails" placeholder="e.g. New apartment in Sliema, need full electrical and AC installation for 3 bedrooms..."></textarea>
+
+      <button class="wa-send-btn" id="waSend">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Open WhatsApp
+      </button>
+    </div>
+  </div>
+
   <!-- WHATSAPP FLOAT -->
-  <a href="https://wa.me/35679432432" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <a href="#" class="whatsapp-float wa-trigger" aria-label="Chat on WhatsApp">
     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
 
@@ -1214,7 +1359,9 @@
         'Air Conditioning',
         'Core Drilling',
         'Earthing Systems',
-        'Infrared Leak Detection'
+        'Infrared Leak Detection',
+        'Solar Panel Installation',
+        'Water Heater Installation'
       ];
       let wordIdx = 0, charIdx = 0, deleting = false;
       function type() {
@@ -1268,6 +1415,65 @@
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal, .reveal-scale').forEach(el => revealObserver.observe(el));
+
+    // ============ WHATSAPP MODAL ============
+    (function initWaModal() {
+      const overlay = document.getElementById('waModal');
+      const closeBtn = document.getElementById('waClose');
+      const sendBtn = document.getElementById('waSend');
+      const nameInput = document.getElementById('waName');
+      const detailsInput = document.getElementById('waDetails');
+      if (!overlay) return;
+
+      function openModal(e) {
+        e.preventDefault();
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => nameInput.focus(), 350);
+      }
+      function closeModal() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      // All WhatsApp triggers open the modal
+      document.querySelectorAll('.wa-trigger').forEach(el => {
+        el.addEventListener('click', openModal);
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+      overlay.addEventListener('click', e => {
+        if (e.target === overlay) closeModal();
+      });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && overlay.classList.contains('active')) closeModal();
+      });
+
+      sendBtn.addEventListener('click', () => {
+        const name = nameInput.value.trim();
+        const checked = Array.from(overlay.querySelectorAll('.wa-chip input:checked'))
+          .map(cb => cb.value);
+        const details = detailsInput.value.trim();
+
+        // Build the message
+        let msg = 'Hi Ceci Installations! 👋\n\n';
+        if (name) msg += 'My name is ' + name + '.\n\n';
+        if (checked.length) {
+          msg += 'I\'m interested in:\n';
+          checked.forEach(s => { msg += '• ' + s + '\n'; });
+          msg += '\n';
+        }
+        if (details) msg += 'Details:\n' + details + '\n\n';
+        if (!checked.length && !details) {
+          msg += 'I\'d like to get a quote for your services.\n\n';
+        }
+        msg += 'Looking forward to hearing from you!';
+
+        const url = 'https://wa.me/35679432432?text=' + encodeURIComponent(msg);
+        window.open(url, '_blank');
+        closeModal();
+      });
+    })();
   </script>
 </body>
 </html>
