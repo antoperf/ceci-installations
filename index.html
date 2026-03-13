@@ -468,6 +468,53 @@
     }
 
     /* ============================
+       PARTNER BANNER
+    ============================ */
+    .partner-banner {
+      background: linear-gradient(135deg, #0d0d0d 0%, #141414 50%, #0d0d0d 100%);
+      padding: 40px 24px;
+      position: relative; overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .partner-banner::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 1px; background: linear-gradient(to right, transparent, var(--border-light), transparent);
+    }
+    .partner-inner {
+      max-width: 1000px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: center;
+      gap: 24px; flex-wrap: wrap;
+    }
+    .partner-logo {
+      display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+    }
+    .partner-logo-icon {
+      width: 52px; height: 52px; position: relative;
+    }
+    .partner-logo-text {
+      font-family: var(--font-display); font-size: 1.8rem;
+      font-weight: 800; color: var(--white); letter-spacing: 0.05em;
+      text-transform: uppercase; line-height: 1;
+    }
+    .partner-divider {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, transparent, var(--border-light), transparent);
+      flex-shrink: 0;
+    }
+    .partner-text {
+      font-family: var(--font-display); font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+      font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gray-300);
+    }
+    @media (max-width: 600px) {
+      .partner-banner { padding: 28px 16px; }
+      .partner-inner { flex-direction: column; gap: 16px; text-align: center; }
+      .partner-divider { width: 40px; height: 1px; }
+      .partner-text { font-size: 0.65rem; letter-spacing: 0.12em; }
+    }
+
+    /* ============================
        REVIEWS
     ============================ */
     .reviews {
@@ -750,7 +797,7 @@
       </div>
       <div class="services-grid">
         <div class="service-card reveal reveal-delay-1">
-          <div class="service-card-bg" style="background-image:url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&q=80')"></div>
+          <div class="service-card-bg" style="background-image:url('https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?w=600&h=400&fit=crop')"></div>
           <div class="service-card-overlay"></div>
           <div class="service-card-content">
             <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M13 2L4.5 12.5h6L9 22l9.5-12.5h-6L13 2z"/></svg></div>
@@ -759,7 +806,7 @@
           </div>
         </div>
         <div class="service-card reveal reveal-delay-2">
-          <div class="service-card-bg" style="background-image:url('https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&q=80')"></div>
+          <div class="service-card-bg" style="background-image:url('https://images.pexels.com/photos/6419128/pexels-photo-6419128.jpeg?w=600&h=400&fit=crop')"></div>
           <div class="service-card-overlay"></div>
           <div class="service-card-content">
             <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 2c-3.5 5.5-7 9-7 13a7 7 0 0014 0c0-4-3.5-7.5-7-13z"/></svg></div>
@@ -768,7 +815,7 @@
           </div>
         </div>
         <div class="service-card reveal reveal-delay-3">
-          <div class="service-card-bg" style="background-image:url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&q=80')"></div>
+          <div class="service-card-bg" style="background-image:url('https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?w=600&h=400&fit=crop')"></div>
           <div class="service-card-overlay"></div>
           <div class="service-card-content">
             <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M4 20h16M8 14c1.5-2 1.5-4 0-6M12 14c1.5-2 1.5-4 0-6M16 14c1.5-2 1.5-4 0-6"/></svg></div>
@@ -777,7 +824,7 @@
           </div>
         </div>
         <div class="service-card reveal reveal-delay-1">
-          <div class="service-card-bg" style="background-image:url('https://images.unsplash.com/photo-1631545806609-3c480b5ea78c?w=600&q=80')"></div>
+          <div class="service-card-bg" style="background-image:url('https://images.pexels.com/photos/5463576/pexels-photo-5463576.jpeg?w=600&h=400&fit=crop')"></div>
           <div class="service-card-overlay"></div>
           <div class="service-card-content">
             <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18M5.6 5.6l3.4 3.4M15 9l3.4-3.4M9 15l-3.4 3.4M18.4 18.4L15 15"/></svg></div>
@@ -786,7 +833,7 @@
           </div>
         </div>
         <div class="service-card reveal reveal-delay-2">
-          <div class="service-card-bg" style="background-image:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80')"></div>
+          <div class="service-card-bg" style="background-image:url('https://images.pexels.com/photos/8486972/pexels-photo-8486972.jpeg?w=600&h=400&fit=crop')"></div>
           <div class="service-card-overlay"></div>
           <div class="service-card-content">
             <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="8" rx="1"/><path d="M10 10v2l2 10 2-10v-2"/></svg></div>
@@ -795,7 +842,7 @@
           </div>
         </div>
         <div class="service-card reveal reveal-delay-3">
-          <div class="service-card-bg" style="background-image:url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&q=80')"></div>
+          <div class="service-card-bg" style="background-image:url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&q=80')"></div>
           <div class="service-card-overlay"></div>
           <div class="service-card-content">
             <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 3v8M6 11h12M8 15h8M10 19h4"/></svg></div>
@@ -804,7 +851,7 @@
           </div>
         </div>
         <div class="service-card reveal reveal-delay-1">
-          <div class="service-card-bg" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80')"></div>
+          <div class="service-card-bg" style="background-image:url('https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?w=600&h=400&fit=crop')"></div>
           <div class="service-card-overlay"></div>
           <div class="service-card-content">
             <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div>
@@ -816,6 +863,22 @@
     </div>
   </section>
 
+  <!-- PARTNER BANNER -->
+  <div class="partner-banner reveal">
+    <div class="partner-inner">
+      <div class="partner-logo">
+        <svg class="partner-logo-icon" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="26" cy="26" r="24" fill="#111"/>
+          <path d="M26 4C14.95 4 6 12.95 6 24s8.95 20 20 20c4.8 0 9.2-1.7 12.6-4.5l-8.2-7.2c-1.2 1-2.8 1.7-4.4 1.7-4.4 0-8-3.6-8-8s3.6-8 8-8c1.8 0 3.4.6 4.7 1.6l8-7.4C35 8.8 30.8 4 26 4z" fill="#E63946"/>
+          <path d="M38.6 11.5l-8 7.4c1.2 1.4 2 3.2 2 5.1 0 2.1-.9 4-2.3 5.3l8.2 7.2C42 33.2 46 29 46 24c0-5-2.4-9.5-6-12.5h-1.4z" fill="#457B9D"/>
+        </svg>
+        <span class="partner-logo-text">Sinclair</span>
+      </div>
+      <div class="partner-divider"></div>
+      <span class="partner-text">Authorised Reseller &amp; Certified Installer</span>
+    </div>
+  </div>
+
   <!-- GALLERY -->
   <section class="gallery" id="gallery">
     <div class="container">
@@ -826,31 +889,31 @@
       </div>
       <div class="gallery-grid">
         <div class="gallery-item tall reveal-scale">
-          <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&q=80" alt="Electrical panel installation" loading="lazy">
+          <img src="https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?w=600&h=400&fit=crop" alt="Electrician working on panel" loading="lazy">
           <div class="gallery-item-overlay"><span class="gallery-item-label">Electrical</span></div>
         </div>
         <div class="gallery-item reveal-scale">
-          <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&q=80" alt="Underfloor heating pipes" loading="lazy">
-          <div class="gallery-item-overlay"><span class="gallery-item-label">Heating</span></div>
-        </div>
-        <div class="gallery-item reveal-scale">
-          <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&q=80" alt="Plumbing work" loading="lazy">
-          <div class="gallery-item-overlay"><span class="gallery-item-label">Plumbing</span></div>
-        </div>
-        <div class="gallery-item wide reveal-scale">
-          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="Construction site" loading="lazy">
-          <div class="gallery-item-overlay"><span class="gallery-item-label">Construction</span></div>
-        </div>
-        <div class="gallery-item reveal-scale">
-          <img src="https://images.unsplash.com/photo-1631545806609-3c480b5ea78c?w=600&q=80" alt="AC installation" loading="lazy">
+          <img src="https://images.pexels.com/photos/5463576/pexels-photo-5463576.jpeg?w=600&h=400&fit=crop" alt="AC unit mounted on wall" loading="lazy">
           <div class="gallery-item-overlay"><span class="gallery-item-label">Air Conditioning</span></div>
         </div>
         <div class="gallery-item reveal-scale">
-          <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&q=80" alt="Electrical wiring" loading="lazy">
+          <img src="https://images.pexels.com/photos/6419128/pexels-photo-6419128.jpeg?w=600&h=400&fit=crop" alt="Plumbing pipe installation" loading="lazy">
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Plumbing</span></div>
+        </div>
+        <div class="gallery-item wide reveal-scale">
+          <img src="https://images.pexels.com/photos/8486972/pexels-photo-8486972.jpeg?w=600&h=400&fit=crop" alt="Concrete drilling work" loading="lazy">
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Core Drilling</span></div>
+        </div>
+        <div class="gallery-item reveal-scale">
+          <img src="https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?w=600&h=400&fit=crop" alt="Underfloor heating system" loading="lazy">
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Underfloor Heating</span></div>
+        </div>
+        <div class="gallery-item reveal-scale">
+          <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&q=80" alt="Electrical panel wiring" loading="lazy">
           <div class="gallery-item-overlay"><span class="gallery-item-label">Wiring</span></div>
         </div>
         <div class="gallery-item reveal-scale">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80" alt="Thermal inspection" loading="lazy">
+          <img src="https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?w=600&h=400&fit=crop" alt="Thermal imaging inspection" loading="lazy">
           <div class="gallery-item-overlay"><span class="gallery-item-label">Leak Detection</span></div>
         </div>
       </div>
