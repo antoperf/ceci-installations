@@ -79,7 +79,7 @@
       .cursor-dot.hover { width: 14px; height: 14px; background: var(--orange); }
       .cursor-ring.hover { width: 56px; height: 56px; border-color: var(--orange); }
       body { cursor: none; }
-      a, button, label, .service-card, .gallery-item, .contact-card { cursor: none; }
+      a, button, label, .service-card, .process-step, .contact-card { cursor: none; }
     }
 
     /* ============================
@@ -393,47 +393,63 @@
     .service-card p { font-size: 0.88rem; color: var(--gray-300); line-height: 1.5; }
 
     /* ============================
-       GALLERY
+       HOW WE WORK
     ============================ */
-    .gallery {
+    .how-we-work {
       padding: 120px 24px; position: relative;
     }
-    .gallery::before {
+    .how-we-work::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0;
       height: 1px; background: linear-gradient(to right, transparent, var(--border-light), transparent);
     }
-    .gallery-header { text-align: center; max-width: 640px; margin: 0 auto 72px; }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: 240px;
-      gap: 12px; max-width: 1200px; margin: 0 auto;
+    .how-we-work-header { text-align: center; max-width: 640px; margin: 0 auto 80px; }
+    .process-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 48px; max-width: 1000px; margin: 0 auto; position: relative;
     }
-    .gallery-item {
-      position: relative; border-radius: 12px; overflow: hidden;
-      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    .process-grid::before {
+      content: ''; position: absolute; top: 56px; left: 15%; right: 15%;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--orange) 20%, var(--orange) 80%, transparent);
+      opacity: 0.2;
     }
-    .gallery-item:hover { transform: scale(1.02); z-index: 2; }
-    .gallery-item.tall { grid-row: span 2; }
-    .gallery-item.wide { grid-column: span 2; }
-    .gallery-item img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+    .process-step {
+      text-align: center; position: relative; padding: 0 12px;
     }
-    .gallery-item:hover img { transform: scale(1.1); }
-    .gallery-item-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
-      opacity: 0; transition: opacity 0.4s;
-      display: flex; align-items: flex-end; padding: 20px;
+    .step-number {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 1.3rem; font-weight: 800;
+      color: var(--white); margin: 0 auto 28px;
+      position: relative; z-index: 2;
+      box-shadow: 0 0 30px rgba(246,137,31,0.25);
     }
-    .gallery-item:hover .gallery-item-overlay { opacity: 1; }
-    .gallery-item-label {
-      font-family: var(--font-display); font-size: 0.8rem;
-      font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--orange);
-      background: rgba(0,0,0,0.5); backdrop-filter: blur(8px);
-      padding: 8px 16px; border-radius: 6px;
+    .step-icon {
+      width: 52px; height: 52px; margin: 0 auto 20px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 14px; display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s;
+    }
+    .process-step:hover .step-icon { border-color: var(--orange); background: var(--orange-glow); }
+    .step-icon svg {
+      width: 24px; height: 24px; stroke: var(--orange);
+      fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .process-step h3 {
+      font-family: var(--font-display); font-size: 1.1rem;
+      font-weight: 700; color: var(--white); margin-bottom: 12px;
+    }
+    .process-step p {
+      font-size: 0.88rem; color: var(--gray-300); line-height: 1.65; max-width: 280px; margin: 0 auto;
+    }
+    @media (max-width: 768px) {
+      .process-grid { grid-template-columns: 1fr; gap: 56px; max-width: 400px; }
+      .process-grid::before {
+        top: 0; bottom: 0; left: 50%; right: auto;
+        width: 2px; height: 100%;
+        background: linear-gradient(to bottom, transparent, var(--orange) 15%, var(--orange) 85%, transparent);
+      }
     }
 
     /* ============================
@@ -694,11 +710,6 @@
     /* ============================
        RESPONSIVE
     ============================ */
-    @media (max-width: 768px) {
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
-      .gallery-item.wide { grid-column: span 2; }
-      .gallery-item.tall { grid-row: span 2; }
-    }
     @media (max-width: 600px) {
       .hero { padding: calc(var(--nav-height) + 24px) 16px 64px; }
       .hero-content { max-width: 100%; }
@@ -712,16 +723,10 @@
         width: 100%; max-width: 280px; justify-content: center;
         padding: 14px 24px; font-size: 0.82rem;
       }
-      .services, .gallery, .about, .contact { padding: 72px 16px; }
-      .services-header, .gallery-header { margin-bottom: 48px; }
+      .services, .how-we-work, .about, .contact { padding: 72px 16px; }
+      .services-header, .how-we-work-header { margin-bottom: 48px; }
       .services-grid { grid-template-columns: 1fr; gap: 14px; }
       .service-card { min-height: 260px; }
-      .gallery-grid {
-        grid-template-columns: 1fr; grid-auto-rows: 220px;
-      }
-      .gallery-item.tall, .gallery-item.wide {
-        grid-row: span 1; grid-column: span 1;
-      }
       .about-features { grid-template-columns: 1fr; }
       .contact-cards { grid-template-columns: 1fr; }
       .contact-cta { font-size: 0.85rem; padding: 16px 32px; }
@@ -751,7 +756,7 @@
       <div class="nav-menu">
         <ul class="nav-links">
           <li><a href="#services" onclick="closeMenu()">Services</a></li>
-          <li><a href="#gallery" onclick="closeMenu()">Our Work</a></li>
+          <li><a href="#process" onclick="closeMenu()">How We Work</a></li>
           <li><a href="#reviews" onclick="closeMenu()">Reviews</a></li>
           <li><a href="#about" onclick="closeMenu()">About</a></li>
           <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
@@ -797,7 +802,7 @@
       </div>
       <div class="services-grid">
         <div class="service-card reveal reveal-delay-1">
-          <div class="service-card-bg" style="background-image:url('https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?w=600&h=400&fit=crop')"></div>
+          <div class="service-card-bg" style="background-image:url('assets/img/electrical.jpg')"></div>
           <div class="service-card-overlay"></div>
           <div class="service-card-content">
             <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M13 2L4.5 12.5h6L9 22l9.5-12.5h-6L13 2z"/></svg></div>
@@ -806,7 +811,7 @@
           </div>
         </div>
         <div class="service-card reveal reveal-delay-2">
-          <div class="service-card-bg" style="background-image:url('https://images.pexels.com/photos/6419128/pexels-photo-6419128.jpeg?w=600&h=400&fit=crop')"></div>
+          <div class="service-card-bg" style="background-image:url('assets/img/plumbing.jpg')"></div>
           <div class="service-card-overlay"></div>
           <div class="service-card-content">
             <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 2c-3.5 5.5-7 9-7 13a7 7 0 0014 0c0-4-3.5-7.5-7-13z"/></svg></div>
@@ -815,7 +820,7 @@
           </div>
         </div>
         <div class="service-card reveal reveal-delay-3">
-          <div class="service-card-bg" style="background-image:url('https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?w=600&h=400&fit=crop')"></div>
+          <div class="service-card-bg" style="background-image:url('assets/img/underfloor.jpg')"></div>
           <div class="service-card-overlay"></div>
           <div class="service-card-content">
             <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M4 20h16M8 14c1.5-2 1.5-4 0-6M12 14c1.5-2 1.5-4 0-6M16 14c1.5-2 1.5-4 0-6"/></svg></div>
@@ -824,7 +829,7 @@
           </div>
         </div>
         <div class="service-card reveal reveal-delay-1">
-          <div class="service-card-bg" style="background-image:url('https://images.pexels.com/photos/5463576/pexels-photo-5463576.jpeg?w=600&h=400&fit=crop')"></div>
+          <div class="service-card-bg" style="background-image:url('assets/img/ac.jpg')"></div>
           <div class="service-card-overlay"></div>
           <div class="service-card-content">
             <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18M5.6 5.6l3.4 3.4M15 9l3.4-3.4M9 15l-3.4 3.4M18.4 18.4L15 15"/></svg></div>
@@ -833,7 +838,7 @@
           </div>
         </div>
         <div class="service-card reveal reveal-delay-2">
-          <div class="service-card-bg" style="background-image:url('https://images.pexels.com/photos/8486972/pexels-photo-8486972.jpeg?w=600&h=400&fit=crop')"></div>
+          <div class="service-card-bg" style="background-image:url('assets/img/drilling.jpg')"></div>
           <div class="service-card-overlay"></div>
           <div class="service-card-content">
             <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="8" rx="1"/><path d="M10 10v2l2 10 2-10v-2"/></svg></div>
@@ -842,7 +847,7 @@
           </div>
         </div>
         <div class="service-card reveal reveal-delay-3">
-          <div class="service-card-bg" style="background-image:url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&q=80')"></div>
+          <div class="service-card-bg" style="background-image:url('assets/img/earthing.jpg')"></div>
           <div class="service-card-overlay"></div>
           <div class="service-card-content">
             <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 3v8M6 11h12M8 15h8M10 19h4"/></svg></div>
@@ -851,7 +856,7 @@
           </div>
         </div>
         <div class="service-card reveal reveal-delay-1">
-          <div class="service-card-bg" style="background-image:url('https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?w=600&h=400&fit=crop')"></div>
+          <div class="service-card-bg" style="background-image:url('assets/img/infrared.jpg')"></div>
           <div class="service-card-overlay"></div>
           <div class="service-card-content">
             <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div>
@@ -879,42 +884,38 @@
     </div>
   </div>
 
-  <!-- GALLERY -->
-  <section class="gallery" id="gallery">
+  <!-- HOW WE WORK -->
+  <section class="how-we-work" id="process">
     <div class="container">
-      <div class="gallery-header reveal">
-        <div class="section-label">Our Work</div>
-        <h2 class="section-title">Projects We're <span>Proud</span> Of</h2>
-        <p>Quality craftsmanship across every installation. Here's a glimpse of what we do.</p>
+      <div class="how-we-work-header reveal">
+        <div class="section-label">Our Process</div>
+        <h2 class="section-title">How We <span>Work</span></h2>
+        <p>From the first call to job completion — professional, transparent, and stress-free.</p>
       </div>
-      <div class="gallery-grid">
-        <div class="gallery-item tall reveal-scale">
-          <img src="https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?w=600&h=400&fit=crop" alt="Electrician working on panel" loading="lazy">
-          <div class="gallery-item-overlay"><span class="gallery-item-label">Electrical</span></div>
+      <div class="process-grid">
+        <div class="process-step reveal reveal-delay-1">
+          <div class="step-number">1</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <h3>Get in Touch</h3>
+          <p>Call or WhatsApp us with what you need. We'll assess the job and give you a clear, honest quote — no hidden fees.</p>
         </div>
-        <div class="gallery-item reveal-scale">
-          <img src="https://images.pexels.com/photos/5463576/pexels-photo-5463576.jpeg?w=600&h=400&fit=crop" alt="AC unit mounted on wall" loading="lazy">
-          <div class="gallery-item-overlay"><span class="gallery-item-label">Air Conditioning</span></div>
+        <div class="process-step reveal reveal-delay-2">
+          <div class="step-number">2</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <h3>Professional Installation</h3>
+          <p>Our certified team handles everything — clean, efficient, on time. We treat your property like our own.</p>
         </div>
-        <div class="gallery-item reveal-scale">
-          <img src="https://images.pexels.com/photos/6419128/pexels-photo-6419128.jpeg?w=600&h=400&fit=crop" alt="Plumbing pipe installation" loading="lazy">
-          <div class="gallery-item-overlay"><span class="gallery-item-label">Plumbing</span></div>
-        </div>
-        <div class="gallery-item wide reveal-scale">
-          <img src="https://images.pexels.com/photos/8486972/pexels-photo-8486972.jpeg?w=600&h=400&fit=crop" alt="Concrete drilling work" loading="lazy">
-          <div class="gallery-item-overlay"><span class="gallery-item-label">Core Drilling</span></div>
-        </div>
-        <div class="gallery-item reveal-scale">
-          <img src="https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?w=600&h=400&fit=crop" alt="Underfloor heating system" loading="lazy">
-          <div class="gallery-item-overlay"><span class="gallery-item-label">Underfloor Heating</span></div>
-        </div>
-        <div class="gallery-item reveal-scale">
-          <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&q=80" alt="Electrical panel wiring" loading="lazy">
-          <div class="gallery-item-overlay"><span class="gallery-item-label">Wiring</span></div>
-        </div>
-        <div class="gallery-item reveal-scale">
-          <img src="https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?w=600&h=400&fit=crop" alt="Thermal imaging inspection" loading="lazy">
-          <div class="gallery-item-overlay"><span class="gallery-item-label">Leak Detection</span></div>
+        <div class="process-step reveal reveal-delay-3">
+          <div class="step-number">3</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <h3>Aftercare &amp; Support</h3>
+          <p>We stand behind our work. Ongoing maintenance, quick response to issues, and support when you need it.</p>
         </div>
       </div>
     </div>
@@ -1080,7 +1081,7 @@
         <p class="footer-text">&copy; 2025 Ceci Installations. All rights reserved.</p>
         <ul class="footer-links">
           <li><a href="#services">Services</a></li>
-          <li><a href="#gallery">Our Work</a></li>
+          <li><a href="#process">How We Work</a></li>
           <li><a href="#reviews">Reviews</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -1108,7 +1109,7 @@
       if (!dot || !ring) return;
       let mx = 0, my = 0, rx = 0, ry = 0;
       document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-      const interactiveEls = 'a, button, label, .service-card, .gallery-item, .contact-card';
+      const interactiveEls = 'a, button, label, .service-card, .process-step, .contact-card';
       document.addEventListener('mouseover', e => {
         if (e.target.closest(interactiveEls)) {
           dot.classList.add('hover'); ring.classList.add('hover');
